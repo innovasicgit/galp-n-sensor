@@ -7,6 +7,22 @@ import time
 from min_tabla import create_table_with_sparklines
 import os
 
+# Función para crear la tabla sensors3 si no existe
+def create_table_if_not_exists(engine):
+    create_table_sql = '''
+    CREATE TABLE IF NOT EXISTS sensors3 (
+        lp VARCHAR,
+        device VARCHAR,
+        lux DOUBLE PRECISION,
+        nh3 DOUBLE PRECISION,
+        hs DOUBLE PRECISION,
+        h DOUBLE PRECISION
+    );
+    '''
+    with engine.connect() as conn:
+        conn.execute(create_table_sql)
+        conn.commit()
+
 # Configuración de la página (DEBE SER LA PRIMERA INSTRUCCIÓN)
 st.set_page_config(
     page_title="Monitoreo Galpón Avícola",
@@ -73,9 +89,16 @@ else:
     
     db_url = f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
 
-# Simula una carga de datos
-with st.spinner("Cargando datos..."):
+
+# Simula una carga de datos y crea la tabla si no existe
+with st.spinner("Cargando datos y verificando tabla..."):
     time.sleep(2)
+    # Crear engine temporal para crear la tabla
+    try:
+        engine = create_engine(db_url)
+        create_table_if_not_exists(engine)
+    except Exception as e:
+        st.error(f"Error al crear/verificar la tabla sensors3: {e}")
 
 # Función para obtener la conexión a la base de datos
 def get_connection():
