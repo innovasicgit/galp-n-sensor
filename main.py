@@ -7,7 +7,7 @@ import os
 app = FastAPI()
 
 # Usa la misma cadena de conexión que tu Streamlit
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:QkqdVQHACSXWDqpWydkHgQhvccLnXGgb@trolley.proxy.rlwy.net:32029/railway")
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgre:6oOuh7voD6IZG1I8qZh8hauB0rWR7r8v@dpg-d2mfbr6r433s73d02tt0-a.oregon-postgres.render.com:5432/backup_2anp")
 engine = create_engine(DATABASE_URL)
 
 # Modelo de datos esperado
