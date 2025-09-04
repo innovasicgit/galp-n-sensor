@@ -85,8 +85,9 @@ def handler(client_soc):
 
 def send_to_db(df):
     # Conexión a la base de datos PostgreSQL
-    engine = create_engine('postgresql+psycopg2://alex:123@localhost:5432/granja')
-    
+
+    DATABASE_URL = "postgresql+pg8000://postgre:6oOuh7voD6IZG1I8qZh8hauB0rWR7r8v@dpg-d2mfbr6r433s73d02tt0-a.oregon-postgres.render.com:5432/backup_2anp"
+    engine = create_engine(DATABASE_URL)    
     # Insertar datos en la tabla 'nombre_tabla'
     df.to_sql('sensors3', engine, if_exists='append', index=False)
 
