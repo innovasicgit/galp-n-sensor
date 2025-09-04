@@ -5,7 +5,8 @@ import datetime
 import os
 
 # Configuración de conexión a la base de datos existente
-engine = create_engine('postgresql+psycopg2://postgres:12345@localhost:5432/backup')
+DATABASE_URL = "postgresql+pg8000://postgre:6oOuh7voD6IZG1I8qZh8hauB0rWR7r8v@dpg-d2mfbr6r433s73d02tt0-a.oregon-postgres.render.com:5432/backup_2anp"
+engine = create_engine(DATABASE_URL)
 # Set para almacenar los IDs que ya hemos mostrado
 shown_ids = set()
 
